@@ -14,14 +14,24 @@ export function SearchResult(result: any[]) {
     const lines = r.payload.text.split(/\n/g);
 
     // Default: Scrapbox Result
+    let title = r.payload.title;
+    let link_target = scrapboxUrl(r.payload.project, r.payload.title);
+    if (r.payload.project === "pluralitybook") {
+      link_target =
+        "https://github.com/nishio/plurality-japanese/blob/main/contents/" +
+        title +
+        ".md";
+      title = "The Plurality Book: " + title;
+    }
+
     return (
       <li key={r.id} className="border-t border-gray-600 p-4">
         <a
-          href={scrapboxUrl(r.payload.project, r.payload.title)}
+          href={link_target}
           target="_blank"
           className="text-blue-400 hover:text-blue-300 hover:underline text-lg"
         >
-          {r.payload.title}
+          {title}
         </a>
         <p className="text-gray-300 text-sm mt-2">
           <span className="font-bold">Score:</span> {r.score}
