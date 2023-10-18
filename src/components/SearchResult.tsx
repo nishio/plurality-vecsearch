@@ -22,6 +22,9 @@ export function SearchResult(result: any[]) {
         title +
         ".md";
       title = "The Plurality Book: " + title;
+    } else if (r.payload.project === "rxc_blog") {
+      link_target = r.payload.url;
+      title = "RxC Blog: " + title;
     }
 
     return (
